@@ -172,6 +172,8 @@ int main(int argc, char ** argv) {
 
   srand(time(NULL));
 
+  std::vector<City> cities;
+  int lookups, nearest;
   if (strcmp(argv[1], "-random") == 0) {
     if (argc != 5) {
       std::cout << "Usage: " << argv[0] 
@@ -181,29 +183,27 @@ int main(int argc, char ** argv) {
     }
 
     int dataset = std::max(1, atoi(argv[2]));
-    int lookups = std::max(1, atoi(argv[3]));
-    int nearest = std::max(1, atoi(argv[4]));
+    lookups = std::max(1, atoi(argv[3]));
+    nearest = std::max(1, atoi(argv[4]));
+    cities = randomCities(dataset);
 
-    std::vector<City> cities = randomCities(dataset);
-
-    // just pick 10km radius
-    benchmarkArango(cities, lookups, nearest);
-    benchmarkVPTree(cities, lookups, nearest);
   } else if (strcmp(argv[1], "-cities") == 0) {
-    std::vector<City> cities = parseCities("cities.txt");
+    
+    lookups = std::max(1, atoi(argv[2]));
+    nearest = std::max(1, atoi(argv[3]));
+    cities = parseCities("cities.txt");
     if (cities.empty()) {
       std::cout << "Cannot read cities file";
       return 1;
     }
 
-    int lookups = std::max(1, atoi(argv[2]));
-    int nearest = std::max(1, atoi(argv[3]));
-
-    benchmarkArango(cities, lookups, nearest);
-    benchmarkVPTree(cities, lookups, nearest);
   } else {
     std::cout << "Specify either '-random' or '-cities'" << std::endl;
+    return 1;
   }
+
+  benchmarkArango(cities, lookups, nearest);
+  benchmarkVPTree(cities, lookups, nearest);
   
   return 0;
 }
