@@ -89,7 +89,7 @@ static void benchmarkArango(std::vector<City> const& cities,
   std::cout << "Building index took " << elapsed.count() << " s\n";
 
   start = std::chrono::steady_clock::now();
-  for (size_t i = 0; i < lookups; i++) {
+  for (int i = 0; i < lookups; i++) {
 
     // just look near some random city
     City const& target = cities[rand() % cities.size()];
@@ -141,7 +141,7 @@ void benchmarkVPTree(std::vector<City> const& cities, int lookups, int nearest) 
   std::cout << "Building index took " << elapsed.count() << " s\n";
 
   start = std::chrono::steady_clock::now();  
-  for (size_t i = 0; i < lookups; i++) {
+  for (int i = 0; i < lookups; i++) {
     // just look near some random city
     City const& target = cities[rand() % cities.size()];
     std::vector<double> xy = {target.latitude, target.longitude};

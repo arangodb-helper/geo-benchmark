@@ -1,7 +1,7 @@
 CC=gcc
 CXX=g++
 RM=rm -f
-CPPFLAGS=-O2 -fopenmp -Wall -Werror -std=c++11
+CPPFLAGS=-O2 -fopenmp -Wall -std=c++11
 LDFLAGS=-fopenmp 
 LDLIBS=-lpthread
 #CPPFLAGS=-g -Wall -Werror -std=c++11

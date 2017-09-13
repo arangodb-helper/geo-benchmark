@@ -238,7 +238,7 @@ BatchDistancesIndices VpTree::getNearestNeighborsBatch(const Container& targets,
     std::vector<std::vector<double>> batchDistances(targets.size());
     std::vector<std::vector<int>> batchIndices(targets.size());
 #pragma omp parallel for schedule(dynamic)
-    for (int i = 0; i < targets.size(); ++i) {
+    for (size_t i = 0; i < targets.size(); ++i) {
         std::tie(batchDistances[i], batchIndices[i]) = getNearestNeighbors(targets[i], neighborsCount);
     }
     return BatchDistancesIndices(batchDistances, batchIndices);
