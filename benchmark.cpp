@@ -21,6 +21,7 @@
 /// @author Simon Grätzer
 ////////////////////////////////////////////////////////////////////////////////
 
+#define CSV_IO_NO_THREAD
 
 #include "arango/mmfiles-geo-index.h"
 #include "csv-parser/csv.h"
@@ -188,7 +189,7 @@ int main(int argc, char ** argv) {
     cities = randomCities(dataset);
 
   } else if (strcmp(argv[1], "-cities") == 0) {
-    
+
     lookups = std::max(1, atoi(argv[2]));
     nearest = std::max(1, atoi(argv[3]));
     cities = parseCities("cities.txt");
